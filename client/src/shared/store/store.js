@@ -1,4 +1,4 @@
-import {StoreProvider, createStore, action, thunk } from 'easy-peasy';
+import { StoreProvider, createStore, action, thunk } from 'easy-peasy';
 import axios from 'axios';
 import config from '../config.json';
 
@@ -18,6 +18,7 @@ let currencyInfo = {
 export const store = createStore({
     currencyInfo: {
         list: [],
+        
         obj: {
             id: currencyInfo.id,
             date: currencyInfo.date,
@@ -27,11 +28,16 @@ export const store = createStore({
             output: currencyInfo.output,
 
         },
-      
+        
         updateCurrencyInfoList: action((state, payload) => {
             state.list = payload;
         }),
-
+        setOutput: action((state, payload)=>{
+            state.obj.output=payload
+          }),
+        upSetOutput: thunk(async (actions, payload)=>{
+            actions.setOutput(payload)
+          }),
         updateCurrencyInfo: action((state, payload) => {
             console.log(JSON.stringify(state.obj))
             console.log(payload)
@@ -52,7 +58,6 @@ export const store = createStore({
         }),
 
         post: thunk(async (actions, payload) => {
-
             const from = payload.from;
             const input = payload.inputAmount;
             var output_ = "";
@@ -85,9 +90,7 @@ export const store = createStore({
                 from: payload.from,
                 to: payload.to,
                 inputAmount: payload.inputAmount,
-                output: output_
-
-
+                output: output_.toFixed(2)
             }
             try {
                 const res = await axios.post(`${config.apiUrl}/currency-conv/`, _obj)
