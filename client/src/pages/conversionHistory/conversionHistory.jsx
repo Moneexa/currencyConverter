@@ -7,10 +7,10 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 export default function ConverterHistory() {
     const listify = useStoreActions(actions => actions.currencyInfo.listCurrencyInfo);
     const list = useStoreState(state => state.currencyInfo.list);
-    const[inputList, setInputList]=useState([]);
+    const [inputList, setInputList] = useState([]);
     useEffect(() => {
-      listify()
-    },[])
+        listify()
+    }, [])
     return (
         <div className="converter-history">
             <div className="pickar-logo-white">
@@ -63,6 +63,7 @@ export default function ConverterHistory() {
                         </Row>)
                     })
                 }
+
             </div>
 
         </div >)

@@ -18,6 +18,7 @@ flex:0.3;
 
 .converter-history .content{
     /* display: flex; */
+margin:0 0px;    
 align-items: center;    
 flex:1
 
