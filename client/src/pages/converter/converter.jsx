@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Form, Row, Container, Button } from 'react-bootstrap'
 import makeRequest from '../../shared/service/currencyConverter.service';
-import { Link, withRouter } from 'react-router-dom'
+import { Link, BrowserRouter as Router } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons'
 import { useStoreActions, useStoreState } from 'easy-peasy';
@@ -97,26 +97,25 @@ export function Converter() {
                         </Container>
                     </div>
                     <div className="col-md-4 col-sm-12" >
-                        <Link style={{
-                            color: "#363A3E",
-                            fontSize: "12px",
-                            lineHeight: "14px"
-                        }} className="history" to="/conversion-history">View conversion history></Link>
+                            <Link style={{
+                                color: "#363A3E",
+                                fontSize: "12px",
+                                lineHeight: "14px"
+                            }} className="history" to="/conversion-history">View conversion history></Link>
                     </div>
                 </div>
             </div>
 
             <div className="calculator">
                 <div className="d-flex align-items-center justify-content-center">
-                    {
-                        success ?
-                            <div className="container">
-                                <p className="input">{result}</p>
-                                <br />
-                                <p className="output">{obj.output + " " + inputToCurrency}</p>
-                            </div>
-                            : ""
-                    }
+
+                    <div className="container">
+                        <p className="input">{success ? result : ""}</p>
+                        <br />
+                        <p data-testid="out"
+                            className="output">{success ? obj.output+" "+inputToCurrency  : ""}</p>
+                    </div>
+
 
                 </div>
 
